@@ -4,6 +4,7 @@
 window.onload = function (){
     setSquares();
     setSquareContent();
+    hoverMouse();
 }
 
 
@@ -40,6 +41,22 @@ function setSquareContent(){
                 }
             })
         }
+
+    }
+}
+
+function hoverMouse(){
+    let board  = document.getElementById('board');
+    let squares = board.children;
+    for(var i =0; i<squares.length; i++){
+        let singleSquare = squares[i];
+        singleSquare.addEventListener("mouseenter", function (){
+            singleSquare.classList.add("hover");
+        });
+
+        singleSquare.addEventListener("mouseleave",function (){
+            singleSquare.classList.remove("hover");
+        })
 
     }
 }
