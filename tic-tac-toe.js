@@ -15,6 +15,7 @@ window.onload = function (){
     setSquares();
     setSquareContent();
     hoverMouse();
+    resetGame();
 }
 
 
@@ -40,7 +41,7 @@ function setSquareContent(){
     for(var i=0; i<squares.length; i++){
         let singleSquare = squares[i];
             singleSquare.addEventListener("click",function (){
-                if(player == "O"){
+                if(player == "O" && (singleSquare.innerHTML != "X" && singleSquare.innerHTML != "O") ){
                     singleSquare.innerHTML = "X";
                     singleSquare.classList.add("X");
                     finalArr[count] = ("X");
@@ -58,7 +59,7 @@ function setSquareContent(){
                     }
 
                     console.log(finalArr);
-                }else if(player == "X"){
+                }else if(player == "X" && (singleSquare.innerHTML != "X" && singleSquare.innerHTML != "O")){
                     singleSquare.innerHTML = "O";
                     singleSquare.classList.add("O");
                     finalArr[count] = "O"
@@ -118,5 +119,32 @@ function handleResultValidation(gameState) {
         let statusDiv = document.getElementById("status");
         statusDiv.innerHTML = winner + " won"
         statusDiv.classList.add("you-won");
+    }else if(!gameState.includes("") &&roundWon == false){
+        console.log("game drawn");
+        let statusDiv = document.getElementById("status");
+        statusDiv.innerHTML = "Game Drawn. Click the New Game button to restart";
+
     }
+}
+
+function resetGame(){
+    let btn = document.getElementsByClassName("btn")
+    btn[0].addEventListener("click",function (){
+        let statusDiv = document.getElementById("status");
+        statusDiv.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+        statusDiv.classList.remove("you-won");
+        let board  = document.getElementById('board');
+        let squares = board.children;
+        for(let i=0; i<squares.length;i++){
+            squares[i].innerHTML = "";
+            console.log()
+            let lastClass = squares[i].classList[1]
+            squares[i].classList.remove(lastClass);
+        }
+    });
+
+
+
+
+
 }
